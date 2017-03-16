@@ -1,0 +1,224 @@
+<resources>
+    <string name="app_name">虎扑看球</string>
+
+    <!--network-->
+    <string name="no_network_text">无网络连接，请检查网络设置</string>
+    <string name="no_data_text">无数据可用，请确认已连接到网络</string>
+    <string name="host_error_text">服务器出错啦，请稍后再试</string>
+    <string name="host_no_data_text">暂无数据可用</string>
+    <string name="tips_foot">哥，这次真的没有了o((≧▽≦o)</string>
+    <string name="refresh_success">更新成功</string>
+    <string name="no_update">当前已是最新</string>
+    <string name="error_refresh_text">出错啦，请点击刷新</string>
+    <string name="status_not_start">未开赛</string>
+    <string name="status_live">直播中</string>
+    <string name="status_over">已结束</string>
+    <string name="ensure_text">确定</string>
+
+    <string name="yc">英超</string>
+    <string name="xj">西甲</string>
+    <string name="yj">意甲</string>
+    <string name="dj">德甲</string>
+    <string name="fj">法甲</string>
+    <string name="zc">中超</string>
+    <string name="other">其他</string>
+    <string name="yt">亚太</string>
+    <string name="tips_text">选择一支或两支球队，并确定</string>
+
+    <string-array name="yc">
+        <item>切尔西</item>
+        <item>热刺</item>
+        <item>利物浦</item>
+        <item>曼城</item>
+        <item>阿森纳</item>
+        <item>曼联</item>
+        <item>埃弗顿</item>
+        <item>西布朗</item>
+        <item>斯托克城</item>
+        <item>南安普敦</item>
+        <item>西汉姆联</item>
+        <item>伯恩利</item>
+        <item>沃特福德</item>
+        <item>伯恩茅斯</item>
+        <item>莱斯特</item>
+        <item>斯旺西</item>
+        <item>水晶宫</item>
+        <item>米德尔斯堡</item>
+        <item>赫尔城</item>
+        <item>桑德兰</item>
+    </string-array>
+
+    <string-array name="xj">
+        <item>巴塞罗那</item>
+        <item>皇家马德里</item>
+        <item>塞维利亚</item>
+        <item>皇家社会</item>
+        <item>马德里竞技</item>
+        <item>比利亚雷亚尔</item>
+        <item>埃瓦尔</item>
+        <item>毕尔巴鄂竞技</item>
+        <item>西班牙人</item>
+        <item>维戈塞尔塔</item>
+        <item>阿拉维斯</item>
+        <item>拉斯帕尔马斯</item>
+        <item>瓦伦西亚</item>
+        <item>皇家贝蒂斯</item>
+        <item>马拉加</item>
+        <item>莱加内斯</item>
+        <item>拉科鲁尼亚</item>
+        <item>格拉纳达</item>
+        <item>希洪竞技</item>
+        <item>奥萨苏纳</item>
+    </string-array>
+
+    <string-array name="yj">
+        <item>尤文图斯</item>
+        <item>罗马</item>
+        <item>那不勒斯</item>
+        <item>亚特兰大</item>
+        <item>拉齐奥</item>
+        <item>AC米兰</item>
+        <item>国际米兰</item>
+        <item>佛罗伦萨</item>
+        <item>桑普多利亚</item>
+        <item>都灵</item>
+        <item>切沃</item>
+        <item>萨索洛</item>
+        <item>卡利亚里</item>
+        <item>乌迪内斯</item>
+        <item>博洛尼亚</item>
+        <item>热那亚</item>
+        <item>恩波利</item>
+        <item>巴勒莫</item>
+        <item>克罗托内</item>
+        <item>佩斯卡拉</item>
+    </string-array>
+
+    <string-array name="dj">
+        <item>拜仁慕尼黑</item>
+        <item>莱比锡</item>
+        <item>多特蒙德</item>
+        <item>霍芬海姆</item>
+        <item>柏林赫塔</item>
+        <item>法兰克福</item>
+        <item>科隆</item>
+        <item>门兴</item>
+        <item>勒沃库森</item>
+        <item>弗赖堡</item>
+        <item>美因茨</item>
+        <item>奥格斯堡</item>
+        <item>沙尔克04</item>
+        <item>不莱梅</item>
+        <item>沃尔夫斯堡</item>
+        <item>汉堡</item>
+        <item>因戈尔施塔特</item>
+        <item>达姆施塔特</item>
+    </string-array>
+
+    <string-array name="fj">
+        <item>摩纳哥</item>
+        <item>巴黎圣日耳曼</item>
+        <item>尼斯</item>
+        <item>里昂</item>
+        <item>波尔多</item>
+        <item>圣埃蒂安</item>
+        <item>马赛</item>
+        <item>雷恩</item>
+        <item>昂热</item>
+        <item>图卢兹</item>
+        <item>甘冈</item>
+        <item>南特</item>
+        <item>蒙彼利埃</item>
+        <item>卡昂</item>
+        <item>梅斯</item>
+        <item>里尔</item>
+        <item>南锡</item>
+        <item>第戎</item>
+        <item>巴斯蒂亚</item>
+        <item>洛里昂</item>
+    </string-array>
+
+    <string-array name="zc">
+        <item>广州富力</item>
+        <item>广州恒大</item>
+        <item>山东鲁能</item>
+        <item>贵州恒丰</item>
+        <item>辽宁开新</item>
+        <item>北京国安</item>
+        <item>重庆力帆</item>
+        <item>河北华夏</item>
+        <item>河南建业</item>
+        <item>江苏苏宁</item>
+        <item>上海上港</item>
+        <item>上海申花</item>
+        <item>延边富德</item>
+        <item>天津权健</item>
+        <item>天津泰达</item>
+        <item>长春亚泰</item>
+    </string-array>
+
+    <string-array name="yt">
+        <item>水原三星</item>
+        <item>首尔FC</item>
+        <item>蔚山现代</item>
+        <item>济州联</item>
+
+        <item>浦和红钻</item>
+        <item>川崎前锋</item>
+        <item>大阪钢巴</item>
+        <item>鹿岛鹿角</item>
+
+        <item>蒙通联</item>
+        <item>香港东方</item>
+
+    </string-array>
+
+    <string-array name="other">
+        <item>圣彼得堡泽尼特</item>
+        <item>波尔图</item>
+        <item>根特</item>
+        <item>罗斯托夫</item>
+        <item>阿尔克马尔</item>
+        <item>基辅迪纳摩</item>
+        <item>莫斯科火车头</item>
+        <item>克拉斯诺达尔</item>
+        <item>阿德莱德联</item>
+        <item>西悉尼流浪者</item>
+        <item>布里斯班狮吼</item>
+        <item>墨尔本胜利</item>
+    </string-array>
+
+    <string-array name="nba">
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=5&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=9&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=24&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=10&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=12&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=29&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=26&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=25&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=7&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=22&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=3&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=6&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=16&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=23&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=13&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=21&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=2&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=28&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=27&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=1&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=11&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=4&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=8&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=14&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=15&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=30&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=18&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=20&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=19&amp;cid=100000</item>
+        <item>http://sports.qq.com/kbsweb/teams.htm?tid=17&amp;cid=100000</item>
+    </string-array>
+
+</resources>

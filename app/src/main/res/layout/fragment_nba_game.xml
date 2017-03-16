@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/game_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lighter_gray" />
+
+    <ImageView
+        android:id="@+id/refresh_image"
+        android:layout_width="@dimen/team_icon_size"
+        android:layout_height="@dimen/team_icon_size"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="@dimen/common_l_spacing"
+        android:layout_marginEnd="@dimen/common_l_spacing"
+        android:background="@drawable/refresh_widget_bg"
+        android:src="@drawable/ic_refresh" />
+
+    <include
+        layout="@layout/error_refresh"
+        android:visibility="gone" />
+
+</FrameLayout>

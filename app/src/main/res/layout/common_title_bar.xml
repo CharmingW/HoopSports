@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/common_title_bar_height"
+    android:background="@color/colorPrimaryDark"
+    tools:showIn="@layout/activity_team_game">
+
+
+    <FrameLayout
+        android:id="@+id/btn_back"
+        style="@style/btn_menu_size"
+        android:layout_width="48dp">
+
+        <ImageView
+            android:layout_width="@dimen/menu_icon_size"
+            android:layout_height="@dimen/menu_icon_size"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_back_white" />
+    </FrameLayout>
+
+    <TextView
+        android:maxLines="2"
+        android:gravity="center"
+        android:id="@+id/title"
+        android:textColor="@color/black"
+        android:textSize="@dimen/l_text_size"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+
+</FrameLayout>

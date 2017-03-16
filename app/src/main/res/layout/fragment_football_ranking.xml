@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/football_league_list"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/lighter_gray"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/yc"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/yc_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_yc" />
+
+            <TextView
+                android:id="@+id/yc_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/yc" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/xj"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/xj_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_xj" />
+
+            <TextView
+                android:id="@+id/xj_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/xj" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/yj"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/yj_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_yj" />
+
+            <TextView
+                android:id="@+id/yj_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/yj" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dj"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/dj_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_dj" />
+
+            <TextView
+                android:id="@+id/dj_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/dj" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fj"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/fj_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_fj" />
+
+            <TextView
+                android:id="@+id/fj_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/fj" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/zc"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/zc_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                app:srcCompat="@drawable/league_zc" />
+
+            <TextView
+                android:id="@+id/zc_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/zc" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:id="@+id/rank_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/common_xl_spacing"
+                android:layout_marginStart="@dimen/common_xl_spacing"
+                android:layout_marginTop="@dimen/nba_regular_item_padding"
+                android:layout_weight="1"
+                android:background="@drawable/btn_shape"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="积分榜"
+                android:textColor="@color/white"
+                android:textSize="@dimen/m_text_size" />
+
+            <TextView
+                android:id="@+id/rank_shooter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/common_xl_spacing"
+                android:layout_marginStart="@dimen/common_xl_spacing"
+                android:layout_marginTop="@dimen/nba_regular_item_padding"
+                android:layout_weight="1"
+                android:background="@drawable/btn_shape"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:text="射手榜"
+                android:textColor="@color/white"
+                android:textSize="@dimen/m_text_size" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/ranking_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

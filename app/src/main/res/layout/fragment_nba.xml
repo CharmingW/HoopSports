@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_nba"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.charmingwong.hoopsports.activity.MainActivity">
+
+    <com.charmingwong.hoopsports.view.BaseViewpager
+        android:id="@+id/nba_pager"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+    <android.support.design.widget.TabLayout
+        app:theme="@style/Widget.Design.TabLayout"
+        android:id="@+id/nba_type_tl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorColor="@color/black"
+        app:tabTextColor="@color/lighter_gray" />
+
+</LinearLayout>
