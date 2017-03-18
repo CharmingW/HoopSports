@@ -45,6 +45,10 @@ public class SportsPagerAdapter extends FragmentPagerAdapter {
 
     public static class SportsFragment extends Fragment {
 
+        /**
+         * @param page ViewPager的页码
+         * @return 填充ViewPager页的Fragment
+         */
         public static SportsFragment newInstance(int page) {
             SportsFragment fragment = new SportsFragment();
             Bundle args = new Bundle();

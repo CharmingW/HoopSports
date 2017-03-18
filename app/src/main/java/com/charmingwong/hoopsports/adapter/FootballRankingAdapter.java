@@ -88,11 +88,23 @@ public class FootballRankingAdapter extends BaseAdapter {
         return convertView;
     }
 
+    /**
+     * 解析成填充列表项的数据
+     *
+     * @param data 注入的原始数据
+     * @return 列表项数据
+     */
     private List<Jifenbang> parseData(Map<String, Object> data) {
         Views views = (Views) data.get("list");
         return views.getJifenbang();
     }
 
+    /**
+     * 根据球队名获取球队 icon id
+     *
+     * @param team 球队名
+     * @return 球队 icon id
+     */
     private int getTeamImageId(String team) {
         switch (team) {
             //英超

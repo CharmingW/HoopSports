@@ -190,6 +190,9 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
 
+    /**
+     * 列表项缓存
+     */
     static class FootballGameListViewHolder extends RecyclerView.ViewHolder {
 
         ImageView homeImage, guestImage;
@@ -209,6 +212,9 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    /**
+     * 列表头缓存
+     */
     static class FootballGameListHeaderViewHolder extends RecyclerView.ViewHolder {
 
         TextView header;
@@ -219,6 +225,12 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    /**
+     * 根据球队名获取球队 icon id
+     *
+     * @param team 球队名
+     * @return 球队 icon id
+     */
     private int getTeamImageId(String team) {
         switch (team) {
             case "切尔西":

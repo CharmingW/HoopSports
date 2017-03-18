@@ -5,7 +5,18 @@ package com.charmingwong.hoopsports.comminterface;
  */
 
 public interface OnResponseCallback {
+
+    /**
+     * 响应成功回调该方法
+     *
+     * @param response 请求的数据
+     */
     public void onResponseSuccess(Object response);
 
+    /**
+     * 响应失败响应该方法
+     *
+     * @param e 异常信息
+     */
     public void onResponseError(Exception e);
 }

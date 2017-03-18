@@ -14,8 +14,6 @@ import com.charmingwong.hoopsports.adapter.FootballGameListAdapter;
 import com.charmingwong.hoopsports.comminterface.OnResponseCallback;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.config.Presenter;
-import com.charmingwong.hoopsports.parser.FootballLeagueParser;
-import com.charmingwong.hoopsports.presenter.FootballLeaguePresenter;
 
 import java.util.Map;
 
@@ -35,6 +33,9 @@ public class FootballLeagueActivity
         init();
     }
 
+    /**
+     * 初始化视图
+     */
     private void init() {
         findViewById(R.id.btn_back).setOnClickListener(this);
         mGameList = (RecyclerView) findViewById(R.id.game_list);

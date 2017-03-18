@@ -27,6 +27,9 @@ import com.charmingwong.hoopsports.util.NetworkUtil;
 
 import java.util.Map;
 
+/**
+ *
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, OnResponseCallback {
 
     private static final String TAG = "MainActivity";
@@ -42,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         init();
     }
 
+    /**
+     * 初始化基本的view
+     */
     private void init() {
         mReceiver = new NetworkStatusReceiver();
         IntentFilter filter = new IntentFilter();
@@ -58,7 +64,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViewPager = (ViewPager) findViewById(R.id.sports_pager);
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.setOffscreenPageLimit(0);
+        loadNBARegularData();
+    }
 
+    /**
+     * 初始化界面时加载nba常规赛数据填充界面
+     */
+    private void loadNBARegularData() {
         //获取数据
         if (Presenter.nbaRegularPresenter == null) {
             Presenter.nbaRegularPresenter = NBARegularPresenter.getInstance(this);
@@ -67,7 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Presenter.nbaRegularPresenter.startPresent();
     }
 
-    //请求数据后调用
+    /**
+     *请求数据完成后，填充数据到相应的界面
+     *
+     * @param data 请求返回的数据集合
+     */
     private void initView(Map<String, Object> data) {
         if (mRefresh.isRefreshing()) {
             mRefresh.setRefreshing(false);
@@ -96,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 设置刷新动作
+     */
     private void setRefreshAction() {
         mRefresh.setEnabled(false);
         mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -122,18 +141,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mReceiver);
-    }
-
+    /**
+     * 检查网络是否可用，不可用则跳出通知条提示用户设置网络
+     */
     private void checkNetworkStatus() {
         Boolean isAvailable = NetworkUtil.checkNetworkStatus(this);
         ViewStub viewStub = (ViewStub) findViewById(R.id.no_network_stub);
@@ -152,6 +162,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 findViewById(R.id.no_network).setVisibility(View.GONE);
             }
         }
+    }
+
+    /**
+     *接收网络状态变化广播
+     */
+    public class NetworkStatusReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            checkNetworkStatus();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
     @Override
@@ -184,13 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initView(null);
     }
 
-    public class NetworkStatusReceiver extends BroadcastReceiver {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            checkNetworkStatus();
-        }
-    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

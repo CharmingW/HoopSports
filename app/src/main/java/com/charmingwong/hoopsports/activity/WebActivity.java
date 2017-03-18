@@ -4,13 +4,12 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,12 +32,14 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
         init();
     }
 
+    /**
+     * 初始化视图
+     */
     private void init() {
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         findViewById(R.id.btn_web_menu).setOnClickListener(this);
 
-        mUrl = getIntent().getData().toString();
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mWebView = (WebView) findViewById(R.id.news_webpage);
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -50,14 +51,6 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
         mWebView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         mWebView.getSettings().setAppCacheEnabled(true);
         mWebView.setWebViewClient(new WebViewClient() {
-
-//            @Override
-//            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-//                super.onReceivedError(view, request, error);
-//                View errorView = findViewById(R.id.error_refresh);
-//                errorView.setOnClickListener(WebActivity.this);
-//                errorView.setVisibility(View.VISIBLE);
-//            }
 
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -72,19 +65,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-
-        mWebView.setWebChromeClient(new WebChromeClient() {
-//            @Override
-//            public void onProgressChanged(WebView view, int newProgress) {
-//
-//                if (newProgress == 100) {
-//                    mProgressBar.setVisibility(View.GONE);//加载完网页进度条消失
-//                }
-//            }
-
-
-        });
-
+        mUrl = getIntent().getData().toString();
         mWebView.loadUrl(mUrl);
     }
 

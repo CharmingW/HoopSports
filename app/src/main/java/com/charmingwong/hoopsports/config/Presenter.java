@@ -10,6 +10,10 @@ import com.charmingwong.hoopsports.presenter.NBATeamPresenter;
  */
 
 public class Presenter {
+
+    /**
+     * 各个频道的数据主导器
+     */
     public static NBARegularPresenter nbaRegularPresenter;
     public static NBATeamPresenter nbaTeamPresenter;
     public static FootballLeaguePresenter footballLeaguePresenter;

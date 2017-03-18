@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 
 /**
  * Created by 56223 on 2017/3/10.
+ *
+ * ViewPager的顶级类，统一取消滚动滑动page的方式
  */
 
 public class BaseViewpager extends ViewPager {

@@ -118,6 +118,12 @@ public class FootballTeamGameListAdapter extends RecyclerView.Adapter<RecyclerVi
         }
     }
 
+    /**
+     * 根据球队名获取球队 icon id
+     *
+     * @param team 球队名
+     * @return 球队 icon id
+     */
     private int getTeamImageId(String team) {
         switch (team) {
             //英超

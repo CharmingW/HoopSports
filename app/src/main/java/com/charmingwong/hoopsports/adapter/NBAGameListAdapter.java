@@ -37,6 +37,12 @@ public class NBAGameListAdapter
         mTeamUrl = context.getResources().getStringArray(R.array.nba);
     }
 
+    /**
+     * 将注入的数据解析成适合列表的数据项
+     *
+     * @param data 注入的原始数据
+     * @return 填充列表的数据
+     */
     private java.util.List parseData(Map<String, Object> data) {
         java.util.List items = new ArrayList<>();
         java.util.List<List> list = (java.util.List<List>) data.get("list");
@@ -140,7 +146,10 @@ public class NBAGameListAdapter
 
     }
 
-    static class NBAGameListViewHolder extends RecyclerView.ViewHolder {
+    /**
+     * 列表项视图缓存
+     */
+    private static class NBAGameListViewHolder extends RecyclerView.ViewHolder {
 
         ImageView homeImage, guestImage;
         TextView time, status, homeName, guestName, score, statistics, highlights;
@@ -159,7 +168,10 @@ public class NBAGameListAdapter
         }
     }
 
-    static class NBAGameListHeaderViewHolder extends RecyclerView.ViewHolder {
+    /**
+     * 头列表项缓存
+     */
+    private static class NBAGameListHeaderViewHolder extends RecyclerView.ViewHolder {
 
         TextView header;
 
@@ -169,6 +181,12 @@ public class NBAGameListAdapter
         }
     }
 
+    /**
+     * 根据球队名返回相应的球队 icon id
+     *
+     * @param teamName 球队名
+     * @return 球队icon id
+     */
     private int getTeamImageId(String teamName) {
         switch (teamName) {
             case "骑士":
@@ -236,6 +254,12 @@ public class NBAGameListAdapter
         }
     }
 
+    /**
+     * 根据球队名返回相应的球队主页 url
+     *
+     * @param teamName 球队名
+     * @return 球队主页 url
+     */
     private String getTeamUrl(String teamName) {
         switch (teamName) {
             case "骑士":

@@ -114,6 +114,9 @@ public class NBATeamAdapter extends BaseAdapter {
         View selectedItem;
     }
 
+    /**
+     * @return 球队名集合
+     */
     private java.util.List<String> getNames() {
         java.util.List<String> names = new ArrayList<>();
         names.add("骑士");
@@ -149,6 +152,9 @@ public class NBATeamAdapter extends BaseAdapter {
         return names;
     }
 
+    /**
+     * @return 球队 icon id 集合
+     */
     private java.util.List<Integer> getTeamIconIds() {
         java.util.List<Integer> ids = new ArrayList<>();
         ids.add(R.drawable.nba_cavaliers);

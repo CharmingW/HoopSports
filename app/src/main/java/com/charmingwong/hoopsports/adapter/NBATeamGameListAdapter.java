@@ -1,9 +1,9 @@
 package com.charmingwong.hoopsports.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +26,11 @@ public class NBATeamGameListAdapter
 
     private java.util.List mData;
 
-    public NBATeamGameListAdapter() {
+    private String[] mTeamUrl;
+
+    public NBATeamGameListAdapter(Context context) {
         mData = parseData(Data.nbaTeamGameData);
+        mTeamUrl = context.getResources().getStringArray(R.array.nba);
     }
 
     private java.util.List parseData(Map<String, Object> data) {
@@ -57,12 +60,12 @@ public class NBATeamGameListAdapter
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         NBARegularListViewHolder itemHolder = (NBARegularListViewHolder) holder;
         final com.charmingwong.hoopsports.entity.nbateamgame.List list
                 = (com.charmingwong.hoopsports.entity.nbateamgame.List) mData.get(position);
-        String team1 = list.getPlayer1();
-        String team2 = list.getPlayer2();
+        final String team1 = list.getPlayer1();
+        final String team2 = list.getPlayer2();
         itemHolder.time.setText(list.getTime());
         String status = list.getStatus();
         if ("0".equals(status)) {
@@ -77,7 +80,7 @@ public class NBATeamGameListAdapter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), WebActivity.class);
-                intent.setData(Uri.parse(list.getPlayer1url()));
+                intent.setData(Uri.parse(getTeamUrl(team1)));
                 v.getContext().startActivity(intent);
             }
         });
@@ -86,7 +89,7 @@ public class NBATeamGameListAdapter
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), WebActivity.class);
-                intent.setData(Uri.parse(list.getPlayer2url()));
+                intent.setData(Uri.parse(getTeamUrl(team2)));
                 v.getContext().startActivity(intent);
             }
         });
@@ -198,6 +201,73 @@ public class NBATeamGameListAdapter
                 return R.drawable.nba_nets;
             default:
                 return 0;
+        }
+    }
+
+    private String getTeamUrl(String teamName) {
+        switch (teamName) {
+            case "骑士":
+                return mTeamUrl[0];
+            case "勇士":
+                return mTeamUrl[1];
+            case "马刺":
+                return mTeamUrl[2];
+            case "火箭":
+                return mTeamUrl[3];
+            case "快船":
+                return mTeamUrl[4];
+            case "灰熊":
+                return mTeamUrl[5];
+            case "爵士":
+                return mTeamUrl[6];
+            case "雷霆":
+                return mTeamUrl[7];
+            case "掘金":
+                return mTeamUrl[8];
+            case "开拓者":
+                return mTeamUrl[9];
+            case "小牛":
+                return mTeamUrl[10];
+            case "鹈鹕":
+                return mTeamUrl[11];
+            case "森林狼":
+                return mTeamUrl[12];
+            case "国王":
+                return mTeamUrl[13];
+            case "湖人":
+                return mTeamUrl[14];
+            case "太阳":
+                return mTeamUrl[15];
+            case "凯尔特人":
+                return mTeamUrl[16];
+            case "猛龙":
+                return mTeamUrl[17];
+            case "奇才":
+                return mTeamUrl[18];
+            case "老鹰":
+                return mTeamUrl[19];
+            case "步行者":
+                return mTeamUrl[20];
+            case "公牛":
+                return mTeamUrl[21];
+            case "活塞":
+                return mTeamUrl[22];
+            case "热火":
+                return mTeamUrl[23];
+            case "雄鹿":
+                return mTeamUrl[24];
+            case "黄蜂":
+                return mTeamUrl[25];
+            case "尼克斯":
+                return mTeamUrl[26];
+            case "76人":
+                return mTeamUrl[27];
+            case "魔术":
+                return mTeamUrl[28];
+            case "篮网":
+                return mTeamUrl[29];
+            default:
+                return "";
         }
     }
 

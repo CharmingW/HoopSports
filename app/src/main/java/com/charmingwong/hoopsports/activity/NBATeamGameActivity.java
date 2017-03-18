@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +14,6 @@ import com.charmingwong.hoopsports.adapter.NBATeamGameListAdapter;
 import com.charmingwong.hoopsports.comminterface.OnResponseCallback;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.config.Presenter;
-import com.charmingwong.hoopsports.parser.NBATeamParser;
-import com.charmingwong.hoopsports.presenter.NBARegularPresenter;
 
 import java.util.Map;
 
@@ -38,6 +35,9 @@ public class NBATeamGameActivity
         init();
     }
 
+    /**
+     * 初始化视图
+     */
     private void init() {
         mErrorView = findViewById(R.id.error_refresh);
         findViewById(R.id.btn_back).setOnClickListener(this);
@@ -67,7 +67,7 @@ public class NBATeamGameActivity
             mAdapter.notifyDataSetChanged();
             return;
         }
-        mAdapter = new NBATeamGameListAdapter();
+        mAdapter = new NBATeamGameListAdapter(this);
         mGameList.setAdapter(mAdapter);
     }
 
@@ -95,4 +95,6 @@ public class NBATeamGameActivity
                 break;
         }
     }
+
+
 }

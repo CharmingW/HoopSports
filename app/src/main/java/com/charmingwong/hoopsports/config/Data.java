@@ -7,6 +7,10 @@ import java.util.Map;
  */
 
 public class Data {
+
+    /**
+     * 各个频道的数据
+     */
     public static Map<String, Object> nbaGameData;
     public static Map<String, Object> nbaTeamGameData;
     public static Map<String, Object> footballGameData;

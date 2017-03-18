@@ -84,6 +84,12 @@ public class FootballTeamListAdapter extends BaseAdapter {
     }
 
 
+    /**
+     * 根据所选联赛获取相应的球队名列表
+     *
+     * @param channel 联赛 view id
+     * @return 球队名列队
+     */
     private String[] getTeamNames(int channel) {
         String[] teamNames;
         switch (channel) {
@@ -118,6 +124,12 @@ public class FootballTeamListAdapter extends BaseAdapter {
     }
 
 
+    /**
+     * 根据球队名获取球队 icon id
+     *
+     * @param team 球队名
+     * @return 球队 icon id
+     */
     private int getTeamImageId(String team) {
         switch (team) {
             //英超

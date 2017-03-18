@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.config.Presenter;
 import com.charmingwong.hoopsports.presenter.FootballLeaguePresenter;
 import com.charmingwong.hoopsports.presenter.FootballTeamPresenter;
-import com.charmingwong.hoopsports.presenter.NBARegularPresenter;
 
 import java.util.Map;
 
@@ -252,6 +250,12 @@ public class FootballPagerAdapter extends FragmentPagerAdapter {
 
         }
 
+        /**
+         * 根据联赛 view id 获取联赛名
+         *
+         * @param id 联赛 view id
+         * @return 联赛名
+         */
         private String getLeagueNameFromId(int id) {
             switch (id) {
                 case R.id.yc:

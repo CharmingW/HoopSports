@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
@@ -23,13 +21,13 @@ import android.webkit.WebViewClient;
 import android.widget.GridView;
 
 import com.charmingwong.hoopsports.R;
-import com.charmingwong.hoopsports.activity.MainActivity;
 import com.charmingwong.hoopsports.activity.NBATeamGameActivity;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.config.Presenter;
 import com.charmingwong.hoopsports.presenter.NBATeamPresenter;
 
-/**h
+/**
+ * h
  * Created by 56223 on 2017/2/28.
  */
 
@@ -75,69 +73,112 @@ public class NBAPagerAdapter extends FragmentPagerAdapter {
             final View rootView;
             int page = getArguments().getInt("page");
             if (page == 0) {
-                rootView = inflater.inflate(R.layout.fragment_nba_game, container, false);
-                rootView.findViewById(R.id.refresh_image).setOnClickListener(((View.OnClickListener) rootView.getContext()));
-                RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.game_list);
-                recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-                recyclerView.addItemDecoration(new ItemDecoration() {
-                    @Override
-                    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                        outRect.set(30, 30, 30, 0);
-                    }
-                });
-                if (Data.nbaGameData != null) {
-                    recyclerView.setAdapter(new NBAGameListAdapter(rootView.getContext()));
-                } else {
-                    rootView.findViewById(R.id.error_refresh).setVisibility(View.VISIBLE);
-                }
+                rootView = getGameListView(inflater, container);
             } else if (page == 1) {
-                rootView = inflater.inflate(R.layout.fragment_nba_team, container, false);
-                GridView gridView = (GridView) rootView.findViewById(R.id.nba_team_list);
-                final NBATeamAdapter adapter = new NBATeamAdapter(rootView.getContext());
-                gridView.setAdapter(adapter);
-                rootView.findViewById(R.id.text_ensure).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Presenter.nbaTeamPresenter == null) {
-                            Presenter.nbaTeamPresenter = NBATeamPresenter.getInstance(v.getContext());
-                        }
-                        Intent intent = new Intent(container.getContext(), NBATeamGameActivity.class);
-                        if (adapter.getmCount() == 1) {
-                            intent.putExtra("home" ,adapter.getSelectedTeams().get(0));
-                        } else {
-                            intent.putExtra("home" , adapter.getSelectedTeams().get(0));
-                            intent.putExtra("guest" ,adapter.getSelectedTeams().get(1));
-                        }
-                        container.getContext().startActivity(intent);
-                    }
-                });
+                rootView = getTeamListView(inflater, container);
             } else {
-                rootView = inflater.inflate(R.layout.fragment_nba_other, container, false);
-                WebView webView = (WebView) rootView.findViewById(R.id.webView_nba);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.getSettings().setSupportZoom(true);
-                webView.getSettings().setBuiltInZoomControls(true);
-                webView.getSettings().setDisplayZoomControls(false);
-                webView.getSettings().setUseWideViewPort(true);
-                webView.getSettings().setLoadWithOverviewMode(true);
-                webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-                webView.getSettings().setAppCacheEnabled(true);
-                webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
-                webView.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public void onPageFinished(WebView view, String url) {
-                        super.onPageFinished(view, url);
-                        rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                    }
+                rootView = getOtherView(inflater, container);
+            }
+            return rootView;
+        }
 
-                    @Override
-                    public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                        super.onPageStarted(view, url, favicon);
-                        rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-                    }
-                });
+        /**
+         * 创建常规比赛page
+         *
+         * @param inflater LayoutInflater
+         * @param container ViewGroup
+         * @return rootView
+         */
+        @NonNull
+        private View getGameListView(LayoutInflater inflater, @Nullable ViewGroup container) {
+            View rootView;
+            rootView = inflater.inflate(R.layout.fragment_nba_game, container, false);
+            rootView.findViewById(R.id.refresh_image).setOnClickListener(((View.OnClickListener) rootView.getContext()));
+            RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.game_list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+            recyclerView.addItemDecoration(new ItemDecoration() {
+                @Override
+                public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                    outRect.set(30, 30, 30, 0);
+                }
+            });
+            if (Data.nbaGameData != null) {
+                recyclerView.setAdapter(new NBAGameListAdapter(rootView.getContext()));
+            } else {
+                rootView.findViewById(R.id.error_refresh).setVisibility(View.VISIBLE);
+            }
+            return rootView;
+        }
 
-                webView.loadUrl("http://sports.qq.com/kbsweb/kbsshare/gamelist.htm?#nav-nba");            }
+        /**
+         * 创建球队列表page
+         *
+         * @param inflater LayoutInflater
+         * @param container ViewGroup
+         * @return rootView
+         */
+        @NonNull
+        private View getTeamListView(LayoutInflater inflater, @Nullable final ViewGroup container) {
+            View rootView;
+            rootView = inflater.inflate(R.layout.fragment_nba_team, container, false);
+            GridView gridView = (GridView) rootView.findViewById(R.id.nba_team_list);
+            final NBATeamAdapter adapter = new NBATeamAdapter(rootView.getContext());
+            gridView.setAdapter(adapter);
+            rootView.findViewById(R.id.text_ensure).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (Presenter.nbaTeamPresenter == null) {
+                        Presenter.nbaTeamPresenter = NBATeamPresenter.getInstance(v.getContext());
+                    }
+                    Intent intent = new Intent(container.getContext(), NBATeamGameActivity.class);
+                    if (adapter.getmCount() == 1) {
+                        intent.putExtra("home", adapter.getSelectedTeams().get(0));
+                    } else {
+                        intent.putExtra("home", adapter.getSelectedTeams().get(0));
+                        intent.putExtra("guest", adapter.getSelectedTeams().get(1));
+                    }
+                    container.getContext().startActivity(intent);
+                }
+            });
+            return rootView;
+        }
+
+        /**
+         * 创建数据统计page
+         *
+         * @param inflater LayoutInflater
+         * @param container ViewGroup
+         * @return rootView
+         */
+        @NonNull
+        private View getOtherView(LayoutInflater inflater, @Nullable ViewGroup container) {
+            final View rootView;
+            rootView = inflater.inflate(R.layout.fragment_nba_other, container, false);
+            WebView webView = (WebView) rootView.findViewById(R.id.webView_nba);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setSupportZoom(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+            webView.getSettings().setDisplayZoomControls(false);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+            webView.getSettings().setAppCacheEnabled(true);
+            webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+                    rootView.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                    super.onPageStarted(view, url, favicon);
+                    rootView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
+                }
+            });
+
+            webView.loadUrl("http://sports.qq.com/kbsweb/kbsshare/gamelist.htm?#nav-nba");
             return rootView;
         }
 
