@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.charmingwong.hoopsports.R;
 import com.charmingwong.hoopsports.activity.FootballTeamActivity;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 /**
  * Created by 56223 on 2017/3/7.
@@ -72,7 +73,8 @@ public class FootballTeamListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.teamIcon.setImageResource(getTeamImageId(getItem(position)));
+        holder.teamIcon
+                .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(getItem(position))));
         holder.teamName.setText(getItem(position));
         return convertView;
     }

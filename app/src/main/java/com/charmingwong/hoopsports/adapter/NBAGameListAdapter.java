@@ -15,6 +15,7 @@ import com.charmingwong.hoopsports.activity.WebActivity;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.entity.nbagame.List;
 import com.charmingwong.hoopsports.entity.nbagame.Tr;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -31,10 +32,12 @@ public class NBAGameListAdapter
 
     private java.util.List mData;
     private String[] mTeamUrl;
+    private Context mContext;
 
     public NBAGameListAdapter(Context context) {
         mData = parseData(Data.nbaGameData);
         mTeamUrl = context.getResources().getStringArray(R.array.nba);
+        mContext = context;
     }
 
     /**
@@ -74,6 +77,8 @@ public class NBAGameListAdapter
         View itemView;
         if (viewType == TYPE_ITEM) {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game, parent, false);
+            itemView.setBackgroundResource(R.drawable.background_selector);
+
             return new NBAGameListViewHolder(itemView);
         } else {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nba_game_header, parent, false);
@@ -98,7 +103,8 @@ public class NBAGameListAdapter
             } else {
                 itemHolder.status.setText(R.string.status_over);
             }
-            itemHolder.homeImage.setImageResource(getTeamImageId(team1));
+            itemHolder.homeImage
+                    .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team1)));
             itemHolder.homeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -107,7 +113,8 @@ public class NBAGameListAdapter
                     v.getContext().startActivity(intent);
                 }
             });
-            itemHolder.guestImage.setImageResource(getTeamImageId(team2));
+            itemHolder.guestImage
+                    .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team2)));
             itemHolder.guestImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

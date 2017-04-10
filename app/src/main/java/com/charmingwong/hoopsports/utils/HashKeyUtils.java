@@ -1,4 +1,4 @@
-package com.charmingwong.hoopsports.util;
+package com.charmingwong.hoopsports.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by CharmingWong on 2016/12/10.
  */
 
-public class HashKeyUtil {
+public class HashKeyUtils {
 
     //生成哈希值
     public static String generateHashKey(String key) {

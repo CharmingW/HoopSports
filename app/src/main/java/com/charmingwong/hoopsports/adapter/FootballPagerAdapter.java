@@ -225,6 +225,7 @@ public class FootballPagerAdapter extends FragmentPagerAdapter {
             }
         }
 
+
         private void setLeagueAction(final View rootView) {
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override

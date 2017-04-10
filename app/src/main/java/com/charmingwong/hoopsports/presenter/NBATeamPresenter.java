@@ -14,9 +14,9 @@ import com.android.volley.toolbox.Volley;
 import com.charmingwong.hoopsports.R;
 import com.charmingwong.hoopsports.comminterface.OnResponseCallback;
 import com.charmingwong.hoopsports.parser.NBATeamParser;
-import com.charmingwong.hoopsports.util.ApplicationUtil;
-import com.charmingwong.hoopsports.util.HashKeyUtil;
-import com.charmingwong.hoopsports.util.NetworkUtil;
+import com.charmingwong.hoopsports.utils.ApplicationUtils;
+import com.charmingwong.hoopsports.utils.HashKeyUtils;
+import com.charmingwong.hoopsports.utils.NetworkUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -85,7 +85,7 @@ public class NBATeamPresenter implements IPresenter {
         if (mDataParser == null) {
             mDataParser = new NBATeamParser();
         }
-        boolean isNetworkAvailable = NetworkUtil.checkNetworkStatus(mContext);
+        boolean isNetworkAvailable = NetworkUtils.checkNetworkStatus(mContext);
         boolean isUpdateAvailable = checkDataUpdate();
         if (isNetworkAvailable && isUpdateAvailable) {
             Log.i(TAG, "startPresent: load nba regular data from network");
@@ -172,8 +172,8 @@ public class NBATeamPresenter implements IPresenter {
         try {
             if (parsedData != null) {
                 File file = new File(
-                        ApplicationUtil.getDiskCacheDir(mContext, CACHE_DIR),
-                        HashKeyUtil.generateHashKey(mUrl)
+                        ApplicationUtils.getDiskCacheDir(mContext, CACHE_DIR),
+                        HashKeyUtils.generateHashKey(mUrl)
                 );
                 fos = new FileOutputStream(file);
                 oos = new ObjectOutputStream(fos);
@@ -210,8 +210,8 @@ public class NBATeamPresenter implements IPresenter {
         ObjectInputStream ois = null;
         try {
             File file = new File(
-                    ApplicationUtil.getDiskCacheDir(mContext, CACHE_DIR),
-                    HashKeyUtil.generateHashKey(mUrl)
+                    ApplicationUtils.getDiskCacheDir(mContext, CACHE_DIR),
+                    HashKeyUtils.generateHashKey(mUrl)
             );
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);

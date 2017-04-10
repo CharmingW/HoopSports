@@ -1,4 +1,4 @@
-package com.charmingwong.hoopsports.util;
+package com.charmingwong.hoopsports.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -8,7 +8,7 @@ import android.net.NetworkInfo;
  * Created by CharmingWong on 2016/12/10.
  */
 
-public class NetworkUtil {
+public class NetworkUtils {
 
     //检查网络状态
     public static boolean checkNetworkStatus(Context context) {

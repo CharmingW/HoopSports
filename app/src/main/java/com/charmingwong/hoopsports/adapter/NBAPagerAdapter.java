@@ -99,7 +99,7 @@ public class NBAPagerAdapter extends FragmentPagerAdapter {
             recyclerView.addItemDecoration(new ItemDecoration() {
                 @Override
                 public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                    outRect.set(30, 30, 30, 0);
+                    outRect.set(30, 0, 30, 30);
                 }
             });
             if (Data.nbaGameData != null) {

@@ -22,8 +22,8 @@ import com.charmingwong.hoopsports.comminterface.OnResponseCallback;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.config.Presenter;
 import com.charmingwong.hoopsports.presenter.NBARegularPresenter;
-import com.charmingwong.hoopsports.util.ApplicationUtil;
-import com.charmingwong.hoopsports.util.NetworkUtil;
+import com.charmingwong.hoopsports.utils.ApplicationUtils;
+import com.charmingwong.hoopsports.utils.NetworkUtils;
 
 import java.util.Map;
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.refresh_image:
                 mRefresh.setEnabled(true);
-                ApplicationUtil.simulateScroll(mRefresh, 0, 0, 0, 800, 200);
+                ApplicationUtils.simulateScroll(mRefresh, 0, 0, 0, 800, 200);
                 break;
             case R.id.no_network:
                 Intent intent = new Intent(Settings.ACTION_SETTINGS);
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 检查网络是否可用，不可用则跳出通知条提示用户设置网络
      */
     private void checkNetworkStatus() {
-        Boolean isAvailable = NetworkUtil.checkNetworkStatus(this);
+        Boolean isAvailable = NetworkUtils.checkNetworkStatus(this);
         ViewStub viewStub = (ViewStub) findViewById(R.id.no_network_stub);
         if (!isAvailable) {
             View noNetwork;

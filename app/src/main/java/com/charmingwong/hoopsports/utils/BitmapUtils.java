@@ -1,6 +1,8 @@
-package com.charmingwong.hoopsports.util;
+package com.charmingwong.hoopsports.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
@@ -8,7 +10,7 @@ import java.io.ByteArrayOutputStream;
  * Created by CharmingWong on 2016/12/10.
  */
 
-public class BitmapUtil {
+public class BitmapUtils {
 
 
     public static byte[] bitmapToByteArray(Bitmap bitmap) {
@@ -27,5 +29,11 @@ public class BitmapUtil {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static Bitmap compressBitmapByResId(Context context, int ResId) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        return BitmapFactory.decodeResource(context.getResources(), ResId, options);
     }
 }

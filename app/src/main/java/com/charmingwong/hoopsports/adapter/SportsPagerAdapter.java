@@ -72,7 +72,7 @@ public class SportsPagerAdapter extends FragmentPagerAdapter {
             } else {
                 rootView = inflater.inflate(R.layout.fragment_football, container, false);
                 ViewPager footballPager = (ViewPager) rootView.findViewById(R.id.football_pager);
-                footballPager.setOffscreenPageLimit(1);
+                footballPager.setOffscreenPageLimit(2);
                 footballPager.setAdapter(
                         new FootballPagerAdapter(((AppCompatActivity) rootView.getContext()).getSupportFragmentManager()));
                 TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.football_type_tl);

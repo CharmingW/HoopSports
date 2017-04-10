@@ -1,5 +1,6 @@
 package com.charmingwong.hoopsports.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.charmingwong.hoopsports.R;
 import com.charmingwong.hoopsports.activity.WebActivity;
 import com.charmingwong.hoopsports.config.Data;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.List;
 
@@ -20,10 +22,13 @@ import java.util.List;
  */
 
 public class FootballTeamGameListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List mData;
 
-    public FootballTeamGameListAdapter() {
+    private List mData;
+    private Context mContext;
+
+    public FootballTeamGameListAdapter(Context context) {
         mData = (List) Data.footballTeamGameData.get("list");
+        mContext = context;
     }
 
     @Override
@@ -35,6 +40,7 @@ public class FootballTeamGameListAdapter extends RecyclerView.Adapter<RecyclerVi
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game, parent, false);
+        itemView.setBackgroundResource(R.drawable.background_selector);
         return new FootballGameListViewHolder(itemView);
     }
 
@@ -47,14 +53,15 @@ public class FootballTeamGameListAdapter extends RecyclerView.Adapter<RecyclerVi
         String team2 = list.getC4T2();
         itemHolder.time.setText(list.getC2() + " " + list.getC3());
         String status = list.getC1();
-        if ("未开始".equals(status)) {
+        if ("未开赛".equals(status)) {
             itemHolder.status.setText(R.string.status_not_start);
         } else if ("直播中".equals(status)) {
             itemHolder.status.setText(R.string.status_live);
         } else {
             itemHolder.status.setText(R.string.status_over);
         }
-        itemHolder.homeImage.setImageResource(getTeamImageId(team1));
+        itemHolder.homeImage
+                .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team1)));
         itemHolder.homeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +70,8 @@ public class FootballTeamGameListAdapter extends RecyclerView.Adapter<RecyclerVi
                 v.getContext().startActivity(intent);
             }
         });
-        itemHolder.guestImage.setImageResource(getTeamImageId(team2));
+        itemHolder.guestImage
+                .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team2)));
         itemHolder.guestImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

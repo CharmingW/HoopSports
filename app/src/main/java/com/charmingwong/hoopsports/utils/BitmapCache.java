@@ -1,4 +1,4 @@
-package com.charmingwong.hoopsports.util;
+package com.charmingwong.hoopsports.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,8 +27,8 @@ public class BitmapCache implements ImageLoader.ImageCache {
     public BitmapCache(Context context) {
         mLruCache = new LruCache<>(8 * 1024 * 1024);
         try {
-            File cacheDir = ApplicationUtil.getDiskCacheDir(context, "bitmap");
-            mDiskLruCache = DiskLruCache.open(cacheDir, ApplicationUtil.getAppVersion(context), 1, 50 * 1024 * 1024);
+            File cacheDir = ApplicationUtils.getDiskCacheDir(context, "bitmap");
+            mDiskLruCache = DiskLruCache.open(cacheDir, ApplicationUtils.getAppVersion(context), 1, 50 * 1024 * 1024);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class BitmapCache implements ImageLoader.ImageCache {
 
     @Override
     public Bitmap getBitmap(String url) {
-        String key = HashKeyUtil.generateHashKey(url);
+        String key = HashKeyUtils.generateHashKey(url);
         Bitmap bitmap = mLruCache.get(key);
         if (bitmap != null) {
             Log.i(TAG, "getBitmap: load bitmap from memory cache");
@@ -66,7 +66,7 @@ public class BitmapCache implements ImageLoader.ImageCache {
 
     @Override
     public void putBitmap(String url, Bitmap bitmap) {
-        String key = HashKeyUtil.generateHashKey(url);
+        String key = HashKeyUtils.generateHashKey(url);
         //写入内存缓存
         mLruCache.put(key, bitmap);
         OutputStream out = null;
@@ -75,7 +75,7 @@ public class BitmapCache implements ImageLoader.ImageCache {
             //写入磁盘缓存
             editor = mDiskLruCache.edit(key);
             out = editor.newOutputStream(0);
-            out.write(BitmapUtil.bitmapToByteArray(bitmap));
+            out.write(BitmapUtils.bitmapToByteArray(bitmap));
             editor.commit();
             Log.i(TAG, "putBitmap: wrote bitmap to disk cache successfully");
         } catch (IOException e) {

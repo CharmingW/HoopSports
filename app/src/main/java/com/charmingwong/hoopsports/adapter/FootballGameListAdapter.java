@@ -1,5 +1,6 @@
 package com.charmingwong.hoopsports.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.charmingwong.hoopsports.entity.footballgame.Saicheng1;
 import com.charmingwong.hoopsports.entity.footballgame.Saicheng2;
 import com.charmingwong.hoopsports.entity.footballgame.Tabs;
 import com.charmingwong.hoopsports.entity.footballgame.Views;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,11 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     private java.util.List mData;
+    private Context mContext;
 
-    public FootballGameListAdapter() {
+    public FootballGameListAdapter(Context context) {
         this.mData = parseData(Data.footballGameData);
+        mContext = context;
     }
 
     @Override
@@ -65,6 +69,7 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
         View itemView;
         if (viewType == TYPE_ITEM) {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game, parent, false);
+            itemView.setBackgroundResource(R.drawable.background_selector);
             return new FootballGameListViewHolder(itemView);
         } else {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_nba_game_header, parent, false);
@@ -82,14 +87,15 @@ public class FootballGameListAdapter extends RecyclerView.Adapter<RecyclerView.V
                 String team2 = saicheng.getC4T2();
                 itemHolder.time.setText(saicheng.getC2() + " " + saicheng.getC3());
                 String status = saicheng.getC1();
-                if ("未开始".equals(status)) {
+                if ("未开赛".equals(status)) {
                     itemHolder.status.setText(R.string.status_not_start);
                 } else if ("直播中".equals(status)) {
                     itemHolder.status.setText(R.string.status_live);
                 } else {
                     itemHolder.status.setText(R.string.status_over);
                 }
-                itemHolder.homeImage.setImageResource(getTeamImageId(team1));
+                itemHolder.homeImage
+                        .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team1)));
                 itemHolder.homeImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

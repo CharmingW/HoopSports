@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.charmingwong.hoopsports.R;
 import com.charmingwong.hoopsports.activity.WebActivity;
 import com.charmingwong.hoopsports.config.Data;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,12 +26,13 @@ public class NBATeamGameListAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private java.util.List mData;
-
+    private Context mContext;
     private String[] mTeamUrl;
 
     public NBATeamGameListAdapter(Context context) {
         mData = parseData(Data.nbaTeamGameData);
         mTeamUrl = context.getResources().getStringArray(R.array.nba);
+        mContext = context;
     }
 
     private java.util.List parseData(Map<String, Object> data) {
@@ -54,6 +56,7 @@ public class NBATeamGameListAdapter
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game, parent, false);
+        itemView.setBackgroundResource(R.drawable.background_selector);
         return new NBARegularListViewHolder(itemView);
 
     }
@@ -75,7 +78,8 @@ public class NBATeamGameListAdapter
         } else {
             itemHolder.status.setText(R.string.status_over);
         }
-        itemHolder.homeImage.setImageResource(getTeamImageId(team1));
+        itemHolder.homeImage
+                .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team1)));
         itemHolder.homeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +88,8 @@ public class NBATeamGameListAdapter
                 v.getContext().startActivity(intent);
             }
         });
-        itemHolder.guestImage.setImageResource(getTeamImageId(team2));
+        itemHolder.guestImage
+                .setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(team2)));
         itemHolder.guestImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

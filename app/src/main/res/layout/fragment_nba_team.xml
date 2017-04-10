@@ -17,17 +17,18 @@
             android:numColumns="5" />
 
         <TextView
-            android:layout_marginBottom="4dp"
-            android:paddingTop="@dimen/common_xs_spacing"
-            android:paddingBottom="@dimen/common_xs_spacing"
-            android:paddingStart="@dimen/common_l_spacing"
-            android:paddingEnd="@dimen/common_l_spacing"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:id="@+id/text_ensure"
-            android:text="@string/tips_text"
             android:layout_width="wrap_content"
-            android:layout_height="32dp" />
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:gravity="center"
+            android:paddingBottom="@dimen/common_xs_spacing"
+            android:paddingEnd="@dimen/common_xl_spacing"
+            android:paddingStart="@dimen/common_xl_spacing"
+            android:paddingTop="@dimen/common_xs_spacing"
+            android:text="@string/tips_text" />
 
     </LinearLayout>
 

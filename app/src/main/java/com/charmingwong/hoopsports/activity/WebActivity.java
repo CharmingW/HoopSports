@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.charmingwong.hoopsports.R;
-import com.charmingwong.hoopsports.util.ApplicationUtil;
+import com.charmingwong.hoopsports.utils.ApplicationUtils;
 
 public class WebActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -126,7 +126,7 @@ public class WebActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
-        ApplicationUtil.setMiuiStatusBarDarkMode(this, true);
+        ApplicationUtils.setMiuiStatusBarDarkMode(this, true);
     }
 
     @Override

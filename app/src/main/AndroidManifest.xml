@@ -17,17 +17,17 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name="com.charmingwong.hoopsports.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.NBATeamGameActivity" />
-        <activity android:name=".activity.FootballLeagueActivity" />
-        <activity android:name=".activity.FootballTeamActivity" />
-        <activity android:name=".activity.WebActivity"/>
+        <activity android:name="com.charmingwong.hoopsports.activity.NBATeamGameActivity" />
+        <activity android:name="com.charmingwong.hoopsports.activity.FootballLeagueActivity" />
+        <activity android:name="com.charmingwong.hoopsports.activity.FootballTeamActivity" />
+        <activity android:name="com.charmingwong.hoopsports.activity.WebActivity"/>
     </application>
 
 </manifest>

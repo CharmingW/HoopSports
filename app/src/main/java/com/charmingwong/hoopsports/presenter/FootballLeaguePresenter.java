@@ -14,9 +14,9 @@ import com.android.volley.toolbox.Volley;
 import com.charmingwong.hoopsports.R;
 import com.charmingwong.hoopsports.comminterface.OnResponseCallback;
 import com.charmingwong.hoopsports.parser.FootballLeagueParser;
-import com.charmingwong.hoopsports.util.ApplicationUtil;
-import com.charmingwong.hoopsports.util.HashKeyUtil;
-import com.charmingwong.hoopsports.util.NetworkUtil;
+import com.charmingwong.hoopsports.utils.ApplicationUtils;
+import com.charmingwong.hoopsports.utils.HashKeyUtils;
+import com.charmingwong.hoopsports.utils.NetworkUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,18 +26,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by 56223 on 2017/3/10.
  */
 
-public class FootballLeaguePresenter implements IPresenter {
+public class FootballLeaguePresenter extends LeaguePresenter {
     private final String DATA_TAG = "football_league_data";
     private final String TAG = "FootballLeaguePresenter";
     private final String CACHE_DIR = "football_league_data";
-    private String mUrl;
+    private Queue<String> mUrls;
+    private Queue<String> mKeys;
 
-    private  Context mContext;
+    private Context mContext;
 
     private OnResponseCallback mOnResponseCallback;
 
@@ -46,11 +49,17 @@ public class FootballLeaguePresenter implements IPresenter {
     private static FootballLeaguePresenter mInstance;
 
     public void setLeagueName(String leagueName) {
-        mUrl = "http://op.juhe.cn/onebox/football/league?key=f1ef7a0470d83e01a6884725e39d7362&league=" + leagueName;
+        String url = "http://op.juhe.cn/onebox/football/league?key=f1ef7a0470d83e01a6884725e39d7362&league=" + leagueName;
+        if (checkDataUpdate(url)) {
+            mUrls.add(url);
+        }
+        mKeys.add(url);
     }
 
     private FootballLeaguePresenter(Context context) {
         mContext = context;
+        mUrls = new LinkedBlockingQueue<>();
+        mKeys = new LinkedBlockingQueue<>();
     }
 
     public static FootballLeaguePresenter getInstance(Context context) {
@@ -70,8 +79,8 @@ public class FootballLeaguePresenter implements IPresenter {
         if (mDataParser == null) {
             mDataParser = new FootballLeagueParser();
         }
-        boolean isNetworkAvailable = NetworkUtil.checkNetworkStatus(mContext);
-        boolean isUpdateAvailable = checkDataUpdate();
+        boolean isNetworkAvailable = NetworkUtils.checkNetworkStatus(mContext);
+        boolean isUpdateAvailable = checkDataUpdate(mKeys.peek());
         if (isNetworkAvailable && isUpdateAvailable) {
             Log.i(TAG, "startPresent: load football data from network");
             requestData();
@@ -81,20 +90,36 @@ public class FootballLeaguePresenter implements IPresenter {
             if (data != null) {
                 returnData(data);
             } else {
+                String url = mKeys.poll();
+                mUrls.add(url);
+                mKeys.add(url);
                 requestData();
             }
         }
     }
 
     //请求数据
-    public void requestData() {
+    private void requestData() {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
 
         Response.Listener listener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, "onResponse: " + response);
-                onRequestCompleted(response);
+                onRequestCompleted(response, mKeys.poll());
+
+                if (!mKeys.isEmpty()) {
+                    Log.i(TAG, "startPresent: load football data from local");
+                    Object data = loadDataFromLocal();
+                    if (data != null) {
+                        returnData(data);
+                    } else {
+                        String url = mKeys.poll();
+                        mUrls.add(url);
+                        mKeys.add(url);
+                        requestData();
+                    }
+                }
             }
         };
 
@@ -106,26 +131,20 @@ public class FootballLeaguePresenter implements IPresenter {
                 returnData(null);
             }
         };
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, mUrl, listener, errorListener);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, mUrls.poll(), listener, errorListener);
         requestQueue.add(stringRequest);
         requestQueue.start();
     }
 
     //请求完成
     @Override
-    public void onRequestCompleted(Object result) {
-        parseData((String) result);
-    }
-
-    //解析数据
-    public void parseData(String data) {
+    public void onRequestCompleted(Object result, String url) {
         Map<String, Object> map = new HashMap<>();
         if (mDataParser != null) {
-            map = mDataParser.parse(data);
+            map = mDataParser.parse((String) result);
         }
         returnData(map);
-        writeDataToLocal(map);
+        writeDataToLocal(map, url);
     }
 
     //返回数据
@@ -146,14 +165,14 @@ public class FootballLeaguePresenter implements IPresenter {
     }
 
     //写入缓存
-    private void writeDataToLocal(Object parsedData) {
+    private void writeDataToLocal(Object parsedData, String url) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
             if (parsedData != null) {
                 File file = new File(
-                        ApplicationUtil.getDiskCacheDir(mContext, CACHE_DIR),
-                        HashKeyUtil.generateHashKey(mUrl)
+                        ApplicationUtils.getDiskCacheDir(mContext, CACHE_DIR),
+                        HashKeyUtils.generateHashKey(url)
                 );
                 fos = new FileOutputStream(file);
                 oos = new ObjectOutputStream(fos);
@@ -163,7 +182,7 @@ public class FootballLeaguePresenter implements IPresenter {
                 //更新时间
                 SharedPreferences sharedPreferences = mContext.getSharedPreferences(DATA_TAG, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putLong(mUrl, System.currentTimeMillis());
+                editor.putLong(url, System.currentTimeMillis());
                 editor.apply();
                 Log.i(TAG, "writeDataToLocal: wrote football data successfully");
             }
@@ -185,17 +204,18 @@ public class FootballLeaguePresenter implements IPresenter {
     }
 
     //读取缓存
-    public Object loadDataFromLocal() {
+    private synchronized Object loadDataFromLocal() {
         FileInputStream fis = null;
         ObjectInputStream ois = null;
         try {
             File file = new File(
-                    ApplicationUtil.getDiskCacheDir(mContext, CACHE_DIR),
-                    HashKeyUtil.generateHashKey(mUrl)
+                    ApplicationUtils.getDiskCacheDir(mContext, CACHE_DIR),
+                    HashKeyUtils.generateHashKey(mKeys.peek())
             );
             fis = new FileInputStream(file);
             ois = new ObjectInputStream(fis);
             Log.i(TAG, "loadDataFromLocal: load football data from local successful");
+            mKeys.remove();
             return ois.readObject();
         } catch (Exception exception) {
             //本地加载数据失败，从网络获取数据
@@ -218,11 +238,11 @@ public class FootballLeaguePresenter implements IPresenter {
     }
 
     //检查更新
-    public boolean checkDataUpdate() {
+    public boolean checkDataUpdate(String url) {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(DATA_TAG, Context.MODE_PRIVATE);
-        long lastUpdate = sharedPreferences.getLong(mUrl, 0);
+        long lastUpdate = sharedPreferences.getLong(url, 0);
         //距离上次更新过去30秒则再次更新
-        return  System.currentTimeMillis() - lastUpdate > 60 * 60 * 1000;
+        return System.currentTimeMillis() - lastUpdate > 60 * 60 * 1000;
     }
 
     public void setOnResponseCallback(OnResponseCallback onResponseCallback) {

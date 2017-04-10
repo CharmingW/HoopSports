@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.charmingwong.hoopsports.R;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +104,7 @@ public class NBATeamAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.teamIcon.setImageResource(mTeamIconIds.get(position));
+        holder.teamIcon.setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, mTeamIconIds.get(position)));
         holder.teamName.setText(mTeamNames.get(position));
         return convertView;
     }

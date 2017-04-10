@@ -10,6 +10,6 @@
     <color name="darker_gray">#ffbebebe</color>
     <color name="black_gray">#ff585858</color>
     <color name="black">@android:color/black</color>
-    <color name="ripple_blue">#6833b5e5</color>
+    <color name="ripple_red">#68d50000</color>
     <color name="ripple_gray">#68585858</color>
 </resources>

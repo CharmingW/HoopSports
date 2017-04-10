@@ -61,7 +61,7 @@ public class FootballTeamActivity
         Data.footballTeamGameData = (Map<String, Object>) response;
         ((TextView) findViewById(R.id.title)).setText((String) Data.footballTeamGameData.get("title"));
         if (mGameList.getAdapter() == null) {
-            mAdapter = new FootballTeamGameListAdapter();
+            mAdapter = new FootballTeamGameListAdapter(this);
             mGameList.setAdapter(mAdapter);
         }
         mAdapter.notifyDataSetChanged();

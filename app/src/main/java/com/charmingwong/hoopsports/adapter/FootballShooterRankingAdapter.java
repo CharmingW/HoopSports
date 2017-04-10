@@ -15,6 +15,7 @@ import com.charmingwong.hoopsports.activity.WebActivity;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.entity.footballgame.Sheshoubang;
 import com.charmingwong.hoopsports.entity.footballgame.Views;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -84,7 +85,7 @@ public class FootballShooterRankingAdapter extends BaseAdapter {
         holder.icon.setOnClickListener(listener);
         holder.teamName.setOnClickListener(listener);
         holder.name.setOnClickListener(listener);
-        holder.icon.setImageResource(getTeamImageId(sheshoubang.getC3()));
+        holder.icon.setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(sheshoubang.getC3())));
         holder.ranking.setText(sheshoubang.getC1());
         holder.name.setText(sheshoubang.getC2());
         holder.teamName.setText(sheshoubang.getC3());

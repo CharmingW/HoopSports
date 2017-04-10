@@ -15,6 +15,7 @@ import com.charmingwong.hoopsports.activity.WebActivity;
 import com.charmingwong.hoopsports.config.Data;
 import com.charmingwong.hoopsports.entity.footballgame.Jifenbang;
 import com.charmingwong.hoopsports.entity.footballgame.Views;
+import com.charmingwong.hoopsports.utils.BitmapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -68,7 +69,7 @@ public class FootballRankingAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.icon.setImageResource(getTeamImageId(jifenbang.getC2()));
+        holder.icon.setImageBitmap(BitmapUtils.compressBitmapByResId(mContext, getTeamImageId(jifenbang.getC2())));
         holder.ranking.setText(jifenbang.getC1());
         holder.name.setText(jifenbang.getC2());
         holder.count.setText(jifenbang.getC3());

@@ -1,7 +1,6 @@
-package com.charmingwong.hoopsports.util;
+package com.charmingwong.hoopsports.utils;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -26,7 +25,7 @@ import java.lang.reflect.Method;
  * Created by CharmingWong on 2016/12/10.
  */
 
-public class ApplicationUtil {
+public class ApplicationUtils {
 
     //获取缓存路径，先从外部存储获取，若无则从内部存储获取
     public static File getDiskCacheDir(Context context, String uniqueName) {
